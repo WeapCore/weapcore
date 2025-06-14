@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
+  <meta name="theme-color" content="#e48fb2">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>WeapCore - Arı Temalı Konsol Client</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>WeapCore - Cherry Blossom Konsol Client</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     :root {
-      --primary-color: #f1c40f;
-      --dark-bg: #1b1b1b;
-      --light-bg: #2c2c2c;
-      --text-color: #fff3cd;
-      --accent-color: #f39c12;
-    }
+  --primary-color: #e48fb2;
+  --dark-bg: #fff0f5;
+  --light-bg: #fce4ec;
+  --text-color: #4a0033;
+  --accent-color: #d81b60;
+}
     body {
-      background: var(--dark-bg);
-      color: var(--text-color);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+  background: linear-gradient(to bottom, #fbeaf2, #fbddea);
+  color: #5a2a44;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+}
     header {
-      background: var(--light-bg);
-    }
+  background: #f7d7e2;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
     .btn-primary {
       background-color: var(--primary-color);
       border-color: var(--primary-color);
@@ -34,29 +36,28 @@
     }
     .hero {
       position: relative;
-      padding: 6rem 0;
-      color: #ffffff;
+      height: 100vh;
       overflow: hidden;
     }
-    .hero video {
+    .hero iframe {
       position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      object-fit: cover;
+      border: none;
       z-index: 0;
     }
-    .hero::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      z-index: 1;
-    }
-    .hero .container {
-      position: relative;
-      z-index: 2;
-    }
+    .hero .overlay {
+  position: relative;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.6);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  backdrop-filter: brightness(1.1) blur(2px);
+}
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -64,83 +65,137 @@
       margin-top: 2rem;
     }
     .card {
-      background: rgba(241, 196, 15, 0.1);
-      box-shadow: 0 2px 6px rgba(241, 196, 15, 0.3);
-      border: 1px solid rgba(241, 196, 15, 0.3);
-      border-radius: 0.75rem;
-      transition: transform 0.3s, box-shadow 0.3s;
-      color: var(--text-color);
-    }
+  background: rgba(251, 234, 242, 0.9);
+  box-shadow: 0 4px 12px rgba(180, 100, 130, 0.3);
+  border: 1px solid rgba(232, 150, 180, 0.2);
+  border-radius: 1rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+  color: var(--text-color);
+  backdrop-filter: blur(3px);
+}
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 4px 12px rgba(243, 156, 18, 0.5);
-    }
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(216, 27, 96, 0.4);
+}
     footer {
-      background: var(--light-bg);
+  background: #f7d7e2;
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.05);
+}
+  
+    .video-bg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      overflow: hidden;
+      z-index: 0;
+      pointer-events: none;
     }
-  </style>
+    .video-foreground {
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+    }
+    .video-foreground iframe {
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    ::-webkit-scrollbar {
+    width: 12px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--dark-bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 6px;
+    border: 3px solid var(--dark-bg);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--accent-color);
+  }
+  ::selection {
+    background: var(--primary-color);
+    color: #000;
+  }
+  ::-moz-selection {
+    background: var(--primary-color);
+    color: #000;
+  }
+</style>
 </head>
 <body class="d-flex flex-column min-vh-100">
 
   <header class="py-4">
     <div class="container text-center">
-      <h1 class="display-5 fw-bold" style="color: var(--primary-color);">WeapCore Konsol Client</h1>
-      <p class="lead" style="color: var(--text-color);">Minecraft AFK otomasyonunda çığır açmaya hazırlanan konsol tabanlı uygulama</p>
-      <p><small>Geliştiren: <a href="https://github.com/GweineTR" class="text-decoration-none" style="color: var(--accent-color);" target="_blank">@GweineTR</a></small></p>
+      <h1 class="display-5 fw-bold">
+  <span style="color: #ccc;">Weap</span><span style="color: var(--primary-color);">Core</span> <small style="font-size: 0.5em; color: var(--text-color);">Konsol İstemcisi</small>
+</h1>
+      <p class="lead" style="color: #5a2a44;">Minecraft AFK otomasyonunda çığır açmaya hazırlanan konsol tabanlı uygulama</p>
+      <p><small style="color: #5a2a44;">Geliştiren: <a href="https://github.com/GweineTR" class="text-decoration-none" style="color: var(--accent-color);" target="_blank">@GweineTR</a></small></p>
     </div>
   </header>
 
   <main class="flex-fill">
-    <section class="hero text-center">
-      <video autoplay muted loop playsinline>
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-block-environment-1324-large.mp4" type="video/mp4">
-      </video>
-      <div class="container">
+    <section class="hero">
+  <img src="https://img.pttavm.com/pimages/592/041/797/5a3e760655d11.png?v=201910111530" alt="Türk Bayrağı" style="position: absolute; top: -20px; right: 10px; height: 130px; z-index: 3;">
+  <div class="video-bg">
+    <div class="video-foreground">
+      <iframe
+        src="https://www.youtube.com/embed/wgsPrKTzm4w?autoplay=1&mute=1&controls=0&loop=1&playlist=wgsPrKTzm4w&modestbranding=1&rel=0&showinfo=0"
+        frameborder="0"
+        allow="autoplay; fullscreen"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+  <div class="overlay text-center text-white" style="text-shadow: 0 0 6px rgba(0,0,0,0.8);">
         <h2 class="fw-bold mb-3" style="color: var(--primary-color);">Çok Yakında!</h2>
         <p class="mb-4">WeapCore konsol client, güçlü ve sade arayüzüyle Minecraft AFK işlemlerini otomatikleştiriyor.</p>
         <div class="d-flex justify-content-center gap-3">
-  <a href="https://github.com/WeapCore/weapcore/releases" class="btn btn-primary btn-lg d-flex align-items-center">
-    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg" alt="Windows" width="24" height="24" class="me-2">
-    Windows
-  </a>
-  <a href="https://github.com/WeapCore/weapcore/releases" class="btn btn-primary btn-lg d-flex align-items-center">
-    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux" width="24" height="24" class="me-2">
-    Linux
-  </a>
-</div>
+          <a href="https://github.com/WeapCore/weapcore/releases" class="btn btn-primary btn-lg d-flex align-items-center">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg" alt="Windows" width="24" height="24" class="me-2">
+            Windows
+          </a>
+          <a href="https://github.com/WeapCore/weapcore/releases" class="btn btn-primary btn-lg d-flex align-items-center">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux" width="24" height="24" class="me-2">
+            Linux
+          </a>
+        </div>
       </div>
     </section>
 
-    <section class="container mt-5">
+    <section class="container mt-5 mb-5">
       <h3 class="mb-4 text-center" style="color: var(--accent-color);">Öne Çıkan Özellikler</h3>
       <div class="cards">
         <div class="card p-4">
-          <h5 class="fw-semibold">Kolay Kurulum</h5>
+  <h5 class="fw-semibold"><img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" width="20" style="margin-right: 8px;">Kolay Kurulum</h5>
           <p>Tek komutla kurulum, zahmetsiz başlangıç.</p>
         </div>
         <div class="card p-4">
-          <h5 class="fw-semibold">Hızlı Otomasyon</h5>
+  <h5 class="fw-semibold"><img src="https://cdn-icons-png.flaticon.com/512/1041/1041916.png" width="20" style="margin-right: 8px;">Hızlı Otomasyon</h5>
           <p>Minimal gecikme ile sürekli AFK modu.</p>
         </div>
         <div class="card p-4">
-          <h5 class="fw-semibold">Gelişmiş Loglama</h5>
+  <h5 class="fw-semibold"><img src="https://cdn-icons-png.flaticon.com/512/1828/1828911.png" width="20" style="margin-right: 8px;">Gelişmiş Loglama</h5>
           <p>Yapılan işlemleri detaylı kayıt altına alır.</p>
         </div>
         <div class="card p-4">
-          <h5 class="fw-semibold">Modüler Yapı</h5>
+  <h5 class="fw-semibold"><img src="https://cdn-icons-png.flaticon.com/512/3649/3649469.png" width="20" style="margin-right: 8px;">Modüler Yapı</h5>
           <p>Yeni özellik eklentilerine açık, genişletilebilir mimari.</p>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="text-center text-light py-3 mt-auto">
+  <footer class="text-center py-3 mt-auto" style="color: #5a2a44;">
     <div class="container">
       <small>&copy; 2025 WeapCore | Geliştiren: <a href="https://github.com/GweineTR" class="text-decoration-none" style="color: var(--accent-color);" target="_blank">@GweineTR</a></small>
     </div>
   </footer>
 
-  <!-- Bootstrap JS Bundle -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
