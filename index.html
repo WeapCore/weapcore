@@ -4,33 +4,139 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>WeapCore - Yakında</title>
+  <title>WeapCore - Arı Temalı Konsol Client</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #f1c40f;
+      --dark-bg: #1b1b1b;
+      --light-bg: #2c2c2c;
+      --text-color: #fff3cd;
+      --accent-color: #f39c12;
+    }
+    body {
+      background: var(--dark-bg);
+      color: var(--text-color);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    header {
+      background: var(--light-bg);
+    }
+    .btn-primary {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+      color: #000;
+    }
+    .btn-primary:hover {
+      background-color: var(--accent-color);
+      border-color: var(--accent-color);
+    }
+    .hero {
+      position: relative;
+      padding: 6rem 0;
+      color: #ffffff;
+      overflow: hidden;
+    }
+    .hero video {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+    .hero .container {
+      position: relative;
+      z-index: 2;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .card {
+      background: rgba(241, 196, 15, 0.1);
+      box-shadow: 0 2px 6px rgba(241, 196, 15, 0.3);
+      border: 1px solid rgba(241, 196, 15, 0.3);
+      border-radius: 0.75rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+      color: var(--text-color);
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(243, 156, 18, 0.5);
+    }
+    footer {
+      background: var(--light-bg);
+    }
+  </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
 
-  <header class="bg-success text-white py-4">
+  <header class="py-4">
     <div class="container text-center">
-      <h1 class="display-4 fw-bold">WeapCore</h1>
-      <p class="lead mb-0">Minecraft AFK otomasyonunda çığır açmaya hazırlanan Türk yapımı uygulama</p>
-      <p class="mt-2"><small>Geliştiren: <a href="https://github.com/GweineTR" class="text-white text-decoration-underline" target="_blank">@GweineTR</a></small></p>
+      <h1 class="display-5 fw-bold" style="color: var(--primary-color);">WeapCore Konsol Client</h1>
+      <p class="lead" style="color: var(--text-color);">Minecraft AFK otomasyonunda çığır açmaya hazırlanan konsol tabanlı uygulama</p>
+      <p><small>Geliştiren: <a href="https://github.com/GweineTR" class="text-decoration-none" style="color: var(--accent-color);" target="_blank">@GweineTR</a></small></p>
     </div>
   </header>
 
   <main class="flex-fill">
-    <section class="bg-light py-5">
-      <div class="container text-center">
-        <h2 class="fw-bold">Çok Yakında!</h2>
-        <p class="mb-4">WeapCore geliştirme aşamasında. Gelişmeleri ve sürümleri aşağıdaki GitHub sayfasından takip edebilirsiniz.</p>
-        <a href="https://github.com/WeapCore/weapcore.github.io/releases/" class="btn btn-success btn-lg">GitHub Sürüm Takibi</a>
+    <section class="hero text-center">
+      <video autoplay muted loop playsinline>
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-block-environment-1324-large.mp4" type="video/mp4">
+      </video>
+      <div class="container">
+        <h2 class="fw-bold mb-3" style="color: var(--primary-color);">Çok Yakında!</h2>
+        <p class="mb-4">WeapCore konsol client, güçlü ve sade arayüzüyle Minecraft AFK işlemlerini otomatikleştiriyor.</p>
+        <div class="d-flex justify-content-center gap-3">
+  <a href="https://github.com/WeapCore/weapcore/releases" class="btn btn-primary btn-lg d-flex align-items-center">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg" alt="Windows" width="24" height="24" class="me-2">
+    Windows
+  </a>
+  <a href="https://github.com/WeapCore/weapcore/releases" class="btn btn-primary btn-lg d-flex align-items-center">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux" width="24" height="24" class="me-2">
+    Linux
+  </a>
+</div>
+      </div>
+    </section>
+
+    <section class="container mt-5">
+      <h3 class="mb-4 text-center" style="color: var(--accent-color);">Öne Çıkan Özellikler</h3>
+      <div class="cards">
+        <div class="card p-4">
+          <h5 class="fw-semibold">Kolay Kurulum</h5>
+          <p>Tek komutla kurulum, zahmetsiz başlangıç.</p>
+        </div>
+        <div class="card p-4">
+          <h5 class="fw-semibold">Hızlı Otomasyon</h5>
+          <p>Minimal gecikme ile sürekli AFK modu.</p>
+        </div>
+        <div class="card p-4">
+          <h5 class="fw-semibold">Gelişmiş Loglama</h5>
+          <p>Yapılan işlemleri detaylı kayıt altına alır.</p>
+        </div>
+        <div class="card p-4">
+          <h5 class="fw-semibold">Modüler Yapı</h5>
+          <p>Yeni özellik eklentilerine açık, genişletilebilir mimari.</p>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer class="bg-dark text-center text-white py-3 mt-auto">
+  <footer class="text-center text-light py-3 mt-auto">
     <div class="container">
-      <small>&copy; 2025 WeapCore | Geliştiren: <a href="https://github.com/GweineTR" class="text-white text-decoration-underline" target="_blank">@GweineTR</a></small>
+      <small>&copy; 2025 WeapCore | Geliştiren: <a href="https://github.com/GweineTR" class="text-decoration-none" style="color: var(--accent-color);" target="_blank">@GweineTR</a></small>
     </div>
   </footer>
 
